@@ -44,5 +44,12 @@ Snake.prototype={
     return this.body.some(function(bodyUnit) {
       return bodyUnit.isSameCoordAs(snakeReference.head)
     })
+  },
+  clear:function() {
+    unpaintSnake(this.head);
+    unpaintSnake(food);
+    this.body.forEach(function(bodyUnit) {
+      unpaintSnake(bodyUnit);
+    });
   }
 }

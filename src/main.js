@@ -41,6 +41,8 @@ const addKeyListener=function() {
   let grid=document.getElementById("keys");
   grid.onkeyup=changeSnakeDirection;
   grid.focus();
+  let button = document.getElementById("restart");
+  button.addEventListener('click',reloadGame);
 }
 
 const createSnake=function() {
@@ -64,7 +66,16 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,200);
+  animator=setInterval(animateSnake,140);
+}
+
+const reloadGame=function() {
+  clearInterval(2);
+  snake.clear();
+  createSnake();
+  drawSnake(snake);
+  createFood(numberOfRows,numberOfCols);
+  drawFood(food);
 }
 
 window.onload=startGame;
