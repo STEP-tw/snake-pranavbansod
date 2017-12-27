@@ -5,12 +5,16 @@ let numberOfCols=120;
 
 let animator=undefined;
 
+const isGameOver = function() {
+  return snake.hitsTheBoundary() || snake.eatsItself()
+}
+
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  if(snake.hitsTheBoundary() || snake.eatsItself()) {
-    clearInterval(2);
+  if(isGameOver()) {
+    clearInterval(animatorId);
     return;
   }
   if(head.isSameCoordAs(food)) {
@@ -67,16 +71,17 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,140);
+  animatorId=setInterval(animateSnake,140);
 }
 
 const reloadGame=function() {
-  clearInterval(2);
+  clearInterval(animatorId);
   snake.clear();
   createSnake();
   drawSnake(snake);
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
+  animatorId=setInterval(animateSnake,140);
 }
 
 window.onload=startGame;
