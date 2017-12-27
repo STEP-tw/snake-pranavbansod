@@ -23,5 +23,20 @@ Snake.prototype={
   },
   turnRight:function() {
     this.head=this.head.turnRight();
+  },
+  hitsTheBoundary:function() {
+    return this.hitsRightWall() || this.hitsLowerWall() || this.hitsUpperWall() || this.hitsLeftWall();
+  },
+  hitsRightWall:function() {
+    return this.head['x']==numberOfCols;
+  },
+  hitsLeftWall:function() {
+    return this.head['x']==-1;
+  },
+  hitsUpperWall:function() {
+    return this.head['y']==-1;
+  },
+  hitsLowerWall:function() {
+    return this.head['y'] == numberOfRows;
   }
 }

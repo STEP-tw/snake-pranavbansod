@@ -17,6 +17,9 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
+  if(snake.hitsTheBoundary()) {
+    clearInterval(2);
+  }
 }
 
 const changeSnakeDirection=function(event) {
