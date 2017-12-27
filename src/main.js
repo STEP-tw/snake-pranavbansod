@@ -9,17 +9,18 @@ const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  paintBody(oldHead);
-  unpaintSnake(oldTail);
-  paintHead(head);
+  if(snake.hitsTheBoundary() || snake.eatsItself()) {
+    clearInterval(2);
+    return;
+  }
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
-  if(snake.hitsTheBoundary() || snake.eatsItself()) {
-    clearInterval(2);
-  }
+  paintBody(oldHead);
+  unpaintSnake(oldTail);
+  paintHead(head);
 }
 
 const changeSnakeDirection=function(event) {
