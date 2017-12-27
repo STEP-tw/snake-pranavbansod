@@ -17,7 +17,7 @@ const animateSnake=function() {
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
-  if(snake.hitsTheBoundary()) {
+  if(snake.hitsTheBoundary() || snake.eatsItself()) {
     clearInterval(2);
   }
 }
@@ -64,7 +64,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,140);
+  animator=setInterval(animateSnake,200);
 }
 
 window.onload=startGame;

@@ -38,5 +38,11 @@ Snake.prototype={
   },
   hitsLowerWall:function() {
     return this.head['y'] == numberOfRows;
+  },
+  eatsItself:function() {
+    let snakeReference = this;
+    return this.body.some(function(bodyUnit) {
+      return bodyUnit.isSameCoordAs(snakeReference.head)
+    })
   }
 }
