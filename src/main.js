@@ -5,18 +5,16 @@ let numberOfCols=120;
 
 let animator=undefined;
 
-const isGameOver = function() {
-  return snake.hitsTheBoundary() || snake.eatsItself()
-}
 
 const animateSnake=function() {
   let oldHead=snake.getHead();
   let oldTail=snake.move();
   let head=snake.getHead();
-  if(isGameOver()) {
+  if(snake.hitsTheBoundary()) {
     clearInterval(animatorId);
     return;
   }
+  if(snake.eatsItself()) clearInterval(animatorId);
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
@@ -46,8 +44,6 @@ const addKeyListener=function() {
   let grid=document.getElementById("keys");
   grid.onkeyup=changeSnakeDirection;
   grid.focus();
-  let button = document.getElementById("restart");
-  button.addEventListener('click',reloadGame);
 }
 
 const createSnake=function() {
@@ -71,16 +67,6 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animatorId=setInterval(animateSnake,140);
-}
-
-const reloadGame=function() {
-  clearInterval(animatorId);
-  snake.clear();
-  createSnake();
-  drawSnake(snake);
-  createFood(numberOfRows,numberOfCols);
-  drawFood(food);
   animatorId=setInterval(animateSnake,140);
 }
 
